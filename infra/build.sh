@@ -8,6 +8,9 @@ echo "Success!"
 echo "Running tests ..."
 clj -X:test
 echo "Success!"
+echo "Generating documentation ..."
+clj -X:release documentation/generate
+echo "Success!"
 echo "Building the jar ..."
 clj -T:infra jar
 echo "Success!"

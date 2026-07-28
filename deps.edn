@@ -3,12 +3,13 @@
                                :extension   "pom"}}
  :aliases
  {:dev     {:extra-deps {org.clojure/clojure {:mvn/version "1.12.5"}}}
-  :test    {:extra-deps {io.github.matthewdowney/rich-comment-tests
-                         {:mvn/version "v1.0.3"}}
+  :test    {:extra-deps  {io.github.matthewdowney/rich-comment-tests
+                          {:mvn/version "v1.0.3"}}
             :extra-paths ["test"]
-            :exec-fn    test/run-tests!
-            :exec-args  {:dirs #{"src"}}}
+            :exec-fn     test/run-tests!
+            :exec-args   {:dirs #{"src"}}}
   :infra   {:extra-paths ["infra"]
             :deps        {io.github.clojure/tools.build {:mvn/version "0.10.14"}}
             :ns-default  build}
-  :release {:extra-paths ["infra"]}}}
+  :release {:extra-paths ["infra"]
+            :extra-deps  {io.github.clojure/tools.build {:mvn/version "0.10.14"}}}}}

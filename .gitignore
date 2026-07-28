@@ -3,3 +3,4 @@ target/
 .idea/
 .nrepl-port
 shrapnel.iml
+docs/api.md
