@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -e
 set -o errexit
 
@@ -13,7 +13,7 @@ if [ "$branch" != "main" ]; then
   echo "Success!"
   echo "Merging into main ..."
   git checkout main
-  git merge $branch
+  git merge --no-ff $branch
   echo "Success!"
 fi
 
@@ -29,3 +29,7 @@ echo "Success!"
 echo "Building the jar ..."
 clj -T:infra jar
 echo "Success!"
+set -o allexport
+source secrets.env
+set +o allexport
+clj -X:deploy

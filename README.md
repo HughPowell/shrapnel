@@ -11,6 +11,20 @@ additions. Inspired, at least in part, by
 
 Currently, it's tagged data literals for the MonetaryAmount implementations.
 
+## Quick start
+[![Clojars Project](https://img.shields.io/clojars/v/net.hughpowell/shrapnel.svg)](https://clojars.org/net.hughpowell/shrapnel)
+
+### deps.edn
+If you're using deps.edn add the following to your deps file
+
+`{:deps {net.hughpowell/shrapnel {:mvn/version "0.1.9-SNAPSHOT"}}}`
+
+### Leiningen/Boot
+
+If your using Leiningen or Boot add the following to your porject
+
+`[net.hughpowell/shrapnel "0.1.9-SNAPSHOT"]`
+
 ## Representation
 
 Monetary amounts are represented like so `#money/money "<currency code> <amount>"`

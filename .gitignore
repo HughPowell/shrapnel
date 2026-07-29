@@ -4,3 +4,6 @@ target/
 .nrepl-port
 shrapnel.iml
 docs/api.md
+secrets.env
+pom.xml
+pom.properties

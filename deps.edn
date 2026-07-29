@@ -12,4 +12,9 @@
             :deps        {io.github.clojure/tools.build {:mvn/version "0.10.14"}}
             :ns-default  build}
   :release {:extra-paths ["infra"]
-            :extra-deps  {io.github.clojure/tools.build {:mvn/version "0.10.14"}}}}}
+            :extra-deps  {io.github.clojure/tools.build {:mvn/version "0.10.14"}}}
+  :deploy  {:extra-deps {slipset/deps-deploy {:mvn/version "0.2.5"}}
+            :exec-fn    deps-deploy.deps-deploy/deploy
+            :exec-args  {:installer     :remote
+                         :sign-release? true
+                         :artifact      "target/shrapnel.jar"}}}}
