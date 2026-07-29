@@ -42,6 +42,16 @@ If your using Leiningen or Boot add the following to your porject
 
 `[net.hughpowell/shrapnel "0.1.9-SNAPSHOT"]`
 
+### Using shrapnel
+
+```clojure
+(require '[net.hughpowell.shrapnel.money :as money])
+
+;; Serialise MonetaryAmount implementations as
+;; #money/money "<currency code> <amount>"
+(money/print-money-literals!)
+```
+
 ## Representation
 
 Monetary amounts are represented like so `#money/money "<currency code> <amount>"`
@@ -79,7 +89,7 @@ reader function.
 
 By default, that creates a MonetaryAmount of Money. If you want to deserialise
 into a different MonetaryAmount then you'll need to rebind the
-`money/*monetary-amount-format-style*` var.
+`money/*monetary-amount-implementation*` var.
 
 ```clojure
 (require '[net.hughpowell.shrapnel.money :as money])
@@ -88,7 +98,7 @@ into a different MonetaryAmount then you'll need to rebind the
     (type))
 => org.javamoney.moneta.Money
 
-(binding [*monetary-amount-format-style* :fast-money]
+(binding [*monetary-amount-implementation* :fast-money]
   (-> (edn/read-string {:readers tags} "#money/money \"AUD 100\"")
       (type)))
 => org.javamoney.moneta.FastMoney
@@ -117,7 +127,7 @@ interface that can be parsed from a string then you can add a `defmethod` to the
 => my.namespace.MyMoney
 ```
 
-If you're going to using your implementation exclusively then you could set
+If you're going to use your implementation exclusively then you could set
 `*monetary-amount-implementation*` permanently.
 
 ```clojure

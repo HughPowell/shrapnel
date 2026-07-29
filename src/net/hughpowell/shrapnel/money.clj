@@ -7,7 +7,7 @@
   (:refer-clojure :exclude [print])
   (:require [clojure.edn :as edn])
   (:import (java.io Writer)
-           (org.javamoney.moneta FastMoney Money RoundedMoney)
+           (javax.money MonetaryAmount)
            (org.javamoney.moneta.format
              ToStringMonetaryAmountFormat
              ToStringMonetaryAmountFormat$ToStringMonetaryAmountFormatStyle)))
@@ -19,17 +19,9 @@
 
   Call this as part of your program's initialisation or dev set up."
   []
-  (defmethod print-method Money [c ^Writer w]
+  (defmethod print-method MonetaryAmount [c ^Writer w]
     (.write w ^String (print c)))
-  (defmethod print-dup Money [c ^Writer w]
-    (.write w ^String (print c)))
-  (defmethod print-method FastMoney [c ^Writer w]
-    (.write w ^String (print c)))
-  (defmethod print-dup FastMoney [c ^Writer w]
-    (.write w ^String (print c)))
-  (defmethod print-method RoundedMoney [c ^Writer w]
-    (.write w ^String (print c)))
-  (defmethod print-dup RoundedMoney [c ^Writer w]
+  (defmethod print-dup MonetaryAmount [c ^Writer w]
     (.write w ^String (print c))))
 
 (def ^{:dynamic true
@@ -43,12 +35,12 @@
   *monetary-amount-implementation* :money)
 
 (defmulti parse-monetary-amount
-          "Creates a [MonetaryAmount](https://javamoney.github.io/apidocs/java.money/javax/money/MonetaryAmount.html)
-          from a string.
+  "Creates a [MonetaryAmount](https://javamoney.github.io/apidocs/java.money/javax/money/MonetaryAmount.html)
+   from a string of the form \"<currency code> <amount>\".
 
-          Included implementations for `:money`, `fast-money` and `rounded-money`
-          that produce their associated monetary amounts."
-          (fn [_ type] type))
+   Included implementations for `:money`, `fast-money` and `rounded-money`
+   that produce their associated monetary amounts."
+  (fn [_ type] type))
 (defmethod parse-monetary-amount :money [s _]
   (-> ToStringMonetaryAmountFormat$ToStringMonetaryAmountFormatStyle/MONEY
       (ToStringMonetaryAmountFormat/of)
@@ -72,6 +64,7 @@
 
 ^:rct/test
 (comment
+  (import '(org.javamoney.moneta Money))
   (print-money-literals!)
   (Money/of 100 "AUD")
   ;=> #money/money "AUD 100"
@@ -88,6 +81,7 @@
   ;=> true
 
   ;; Round trip FastMoney
+  (import '(org.javamoney.moneta FastMoney))
   (let [m (FastMoney/of 100 "AUD")]
     (binding [*monetary-amount-implementation* :fast-money]
       (->> (with-out-str (clojure.core/print m))
