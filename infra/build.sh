@@ -35,7 +35,10 @@ set -o allexport
 source secrets.env
 set +o allexport
 clj -X:deploy
-echo "Deleting feature branch ..."
-git branch -D "$branch"
-git branch -D --remote "origin/$branch"
-echo "Success"
+
+if [ "$branch" != "main" ]; then
+  echo "Deleting feature branch ..."
+  git branch -D "$branch"
+  git branch -D --remote "origin/$branch"
+  echo "Success"
+fi
