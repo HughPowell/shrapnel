@@ -20,7 +20,9 @@ fi
 echo "Cleaning up from last time ..."
 clj -T:infra clean
 echo "Success!"
-echo "Running tests on main..."
+echo "Running tests and linters on main..."
+clj-kondo --lint src test infra
+cljfmt check --function-arguments-indentation cursive
 clj -X:test
 echo "Success!"
 echo "Pushing commits to remote..."

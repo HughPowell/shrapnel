@@ -5,7 +5,6 @@
   Monetary amounts are serialised to #money/money \"<currency code> <amount>\",
   e.g. `#money/money \"100 AUD\"`."
   (:refer-clojure :exclude [print])
-  (:require [clojure.edn :as edn])
   (:import (java.io Writer)
            (javax.money MonetaryAmount)
            (org.javamoney.moneta.format
