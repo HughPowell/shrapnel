@@ -11,6 +11,23 @@ additions. Inspired, at least in part, by
 
 Currently, it's tagged data literals for the MonetaryAmount implementations.
 
+## Other options
+
+Here's a few other options for dealing with money.
+
+### Doubles
+If you're only recording prices or doing a small amount of maths (for some definition of small) then using a double is
+probably fine. You'll likely have to do some work to display the minor unit (cents, pence, etc.).
+
+### Ints as the minor unit (e.g. cents, pence, etc.) value
+This will work for most arithmetic calculations and predicates. It becomes complex once you have to do division,
+including calculating the value in another currency using an exchange rate. Experience tells me you'll also end up with
+your monetary values beings suffixed with "-as-cents" (or your local currency equivalent) and then one or two that don't
+and wondering if that matters or not.
+
+### [clojureworkz/money](https://github.com/clojurewerkz/money)
+Battletested library powered by [joda-money](https://www.joda.org/joda-money/). An excellent choice.
+
 ## Quick start
 [![Clojars Project](https://img.shields.io/clojars/v/net.hughpowell/shrapnel.svg)](https://clojars.org/net.hughpowell/shrapnel)
 
