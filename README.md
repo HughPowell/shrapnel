@@ -49,13 +49,13 @@ Battletested library powered by [joda-money](https://www.joda.org/joda-money/). 
 ### deps.edn
 If you're using deps.edn add the following to your deps file
 
-`{:deps {net.hughpowell/shrapnel {{:mvn/version "0.1.20}"}}}`
+`{:deps {net.hughpowell/shrapnel {:mvn/version "0.1.20"}}}`
 
 ### Leiningen/Boot
 
 If your using Leiningen or Boot add the following to your porject
 
-`[[net.hughpowell.shrapnel "0.1.20"]]`
+`[net.hughpowell.shrapnel "0.1.20"]`
 
 ### Using shrapnel
 
