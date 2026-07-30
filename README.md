@@ -11,19 +11,34 @@ additions. Inspired, at least in part, by
 
 Currently, it's tagged data literals for the MonetaryAmount implementations.
 
-## Other options
+## Why this library
+I've lost track of the number of times I've needed to represent money in a 
+project and reached for either doubles or ints. Which works fine until it 
+doesn't, generally at the point at which division enters the picture or the 
+monetary value needs to be displayed.
 
+### Goals of Shrapnel
+Shrapnel aims to be a library that
+* is simple and scales with our need to use money. 
+* does for money what lists, vectors, maps and sets have done for collections.
+  java-time, I feel, has done a very good job of this for times and dates.
+* is complete and includes tech.check generators, tagged literal data 
+  readers and [malli](https://github.com/metosin/malli) specifications.
+
+## Other options
 Here's a few other options for dealing with money.
 
 ### Doubles
-If you're only recording prices or doing a small amount of maths (for some definition of small) then using a double is
-probably fine. You'll likely have to do some work to display the minor unit (cents, pence, etc.).
+If you're only recording prices or doing a small amount of maths (for some
+definition of small) then using a double is probably fine. You'll likely have to
+do some work to display the minor unit (cents, pence, etc.).
 
 ### Ints as the minor unit (e.g. cents, pence, etc.) value
-This will work for most arithmetic calculations and predicates. It becomes complex once you have to do division,
-including calculating the value in another currency using an exchange rate. Experience tells me you'll also end up with
-your monetary values beings suffixed with "-as-cents" (or your local currency equivalent) and then one or two that don't
-and wondering if that matters or not.
+This will work for most arithmetic calculations and predicates. It becomes
+complex once you have to do division, including calculating the value in another
+currency using an exchange rate. Experience tells me you'll also end up with
+your monetary values beings suffixed with "-as-cents" (or your local currency
+equivalent) and then one or two that don't and wondering if that matters or not.
 
 ### [clojureworkz/money](https://github.com/clojurewerkz/money)
 Battletested library powered by [joda-money](https://www.joda.org/joda-money/). An excellent choice.
